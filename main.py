@@ -8,7 +8,7 @@ app = FastAPI()
 # ✅ CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],       # for hackathons, allow all
+    allow_origins=["*"],  # allow all for hackathons
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -16,7 +16,7 @@ app.add_middleware(
 
 # ✅ Supabase client (read from Render env vars)
 SUPABASE_URL: str = os.getenv("https://meubndlpfrjlqrgjezyv.supabase.co")
-SUPABASE_SERVICE_ROLE_KEY: str = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ldWJuZGxwZnJqbHFyZ2plenl2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Nzg2MDM2NiwiZXhwIjoyMDczNDM2MzY2fQ.muaXbJY29xhyG8T_wkKZfWxJJdV-YC7ouKgj5AIboaw")  # 🔑 updated
+SUPABASE_SERVICE_ROLE_KEY: str = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ldWJuZGxwZnJqbHFyZ2plenl2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Nzg2MDM2NiwiZXhwIjoyMDczNDM2MzY2fQ.muaXbJY29xhyG8T_wkKZfWxJJdV-YC7ouKgj5AIboaw")
 
 if not SUPABASE_URL or not SUPABASE_SERVICE_ROLE_KEY:
     raise ValueError("❌ Missing Supabase environment variables. Check Render settings.")
