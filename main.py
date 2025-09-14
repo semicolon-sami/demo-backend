@@ -1,18 +1,22 @@
 from fastapi import FastAPI
-from supabase import create_client
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Supabase config
-SUPABASE_URL = "https://meubndlpfrjlqrgjezyv.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ldWJuZGxwZnJqbHFyZ2plenl2Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1Nzg2MDM2NiwiZXhwIjoyMDczNDM2MzY2fQ.muaXbJY29xhyG8T_wkKZfWxJJdV-YC7ouKgj5AIboaw"  # backend only
-supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+# Allow frontend (Vercel) to access backend
+origins = [
+    "https://demo-frontend-eta-ruby.vercel.app",  # your Vercel frontend URL
+    "http://localhost:3000"  # for local dev
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
     return {"message": "Backend is working!"}
-
-@app.get("/users")
-def get_users():
-    response = supabase.table("users").select("*").execute()
-    return response.data
