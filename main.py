@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()  # take variables from .env
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from supabase import create_client, Client
